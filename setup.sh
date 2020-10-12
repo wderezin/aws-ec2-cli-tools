@@ -12,7 +12,7 @@ then
   do
     if [ -r \$f ]
     then
-      . $f
+      . \$f
     fi
   done
 fi
