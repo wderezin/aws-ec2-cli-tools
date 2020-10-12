@@ -1,5 +1,5 @@
 
-function setup-aws-environment {
+function export-aws-env {
   if [[ "${AWS_DEFAULT_REGION}" == "" ]]
   then
     export AWS_DEFAULT_REGION=$(curl -s --connect-timeout 3 -s http://169.254.169.254/latest/dynamic/instance-identity/document/ | jq -r '.region')
@@ -9,6 +9,5 @@ function setup-aws-environment {
   do
     eval export $VAR
   done < <(aws-env-vars)
-
 }
-export -f setup-aws-environment
+export -f export-aws-env

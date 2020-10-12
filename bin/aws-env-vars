@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+if [[ ! -z "$1" ]]
+then
+  ECHO_PREFIX=$1
+fi
+
 if [[ "${AWS_DEFAULT_REGION}" == "" ]]
 then
   export AWS_DEFAULT_REGION=$(curl -s --connect-timeout 3 -s http://169.254.169.254/latest/dynamic/instance-identity/document/ | jq -r '.region')
@@ -11,7 +16,7 @@ INSTANCE_ID=${INSTANCE_ID:-$(ec2metadata --instance-id)}
 while read KEY VALUE
   do
     KEY=$(echo ${KEY} |  tr a-z-: A-Z__ )
-    echo ${KEY}=\"${VALUE}\"
+    echo $ECHO_PREFIX ${KEY}=\"${VALUE}\"
     if [[ $KEY == "SSM_PREFIX" ]]
     then
       SSM_PREFIX=$VALUE
@@ -23,6 +28,6 @@ then
    while read KEY VALUE
     do
       KEY=$(basename ${KEY} |  tr a-z-: A-Z__ )
-      echo ${KEY}=\"${VALUE}\"
+      echo $ECHO_PREFIX ${KEY}=\"${VALUE}\"
     done < <(aws ssm get-parameters-by-path --path $SSM_PREFIX --with-decryption --no-paginate  --query 'Parameters[*].[Name,Value]' --output=text)
 fi
