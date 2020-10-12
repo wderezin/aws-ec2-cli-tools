@@ -1,8 +1,8 @@
 
 function ssm-env {
-  for VAR in $(ssm-vars)
+  while read VAR
   do
     eval export $VAR
-  done
+  done < <(ssm-vars)
 }
 export -f ssm-env

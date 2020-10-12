@@ -1,8 +1,8 @@
 
 function ec2tags-env {
-  for VAR in $(ec2tags-vars)
+  while read VAR
   do
     eval export $VAR
-  done
+  done < <(ec2tags-vars)
 }
 export -f ec2tags-env
