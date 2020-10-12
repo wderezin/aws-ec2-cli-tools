@@ -1,2 +1,4 @@
 # aws-ec2-cli-tools
-A collection of cli tools for EC2
+
+A collection of bash cli tools for EC2
+
