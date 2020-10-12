@@ -8,7 +8,7 @@ echo "
 PATH=$TOOLS_DIR/bin:\$PATH
 if [ -d $TOOLS_DIR/functions ]
 then
-  for f in $TOOLS_DIR/functions/*.sh
+  for f in $TOOLS_DIR/functions/*.bash $TOOLS_DIR/functions/*.sh
   do
     if [ -r \$f ]
     then
