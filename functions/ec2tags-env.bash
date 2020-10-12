@@ -5,3 +5,4 @@ function ec2tags-env {
     eval export $VAR
   done
 }
+export -f ec2tags-env

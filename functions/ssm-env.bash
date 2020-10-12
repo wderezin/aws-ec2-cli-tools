@@ -5,3 +5,4 @@ function ssm-env {
     eval export $VAR
   done
 }
+export -f ssm-env
