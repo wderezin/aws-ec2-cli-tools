@@ -8,9 +8,11 @@ fi
 if [[ "${AWS_DEFAULT_REGION}" == "" ]]
 then
   export AWS_DEFAULT_REGION=$(curl -s --connect-timeout 3 -s http://169.254.169.254/latest/dynamic/instance-identity/document/ | jq -r '.region')
+  echo $ECHO_PREFIX AWS_DEFAULT_REGION=$AWS_DEFAULT_REGION
 fi
 
 INSTANCE_ID=${INSTANCE_ID:-$(ec2metadata --instance-id)}
+echo $ECHO_PREFIX INSTANCE_ID=$INSTANCE_ID
 
 # Show Instance Tags as variables
 while read KEY VALUE
