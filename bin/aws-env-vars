@@ -31,5 +31,5 @@ then
     do
       KEY=$(basename ${KEY} |  tr a-z-: A-Z__ )
       echo $ECHO_PREFIX ${KEY}=\"${VALUE}\"
-    done < <(aws ssm get-parameters-by-path --path $SSM_PREFIX --with-decryption --no-paginate  --query 'Parameters[*].[Name,Value]' --output=text)
+    done < <(aws ssm get-parameters-by-path --path $SSM_PREFIX --with-decryption --query 'Parameters[*].[Name,Value]' --output=text)
 fi
